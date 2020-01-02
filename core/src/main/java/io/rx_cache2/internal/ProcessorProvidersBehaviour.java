@@ -110,7 +110,6 @@ public final class ProcessorProvidersBehaviour implements ProcessorProviders {
             replyObservable = getDataFromLoader(configProvider, record);
         }
 
-
         // if (record != null && !configProvider.evictProvider().evict()) {
         //   replyObservable = Observable.just(new Reply(record.getData(), record.getSource(), configProvider.isEncrypted()));
         // } else {
@@ -181,6 +180,7 @@ public final class ProcessorProvidersBehaviour implements ProcessorProviders {
         return configProvider.getLoaderObservable().map(new Function() {
             @Override
             public Reply apply(Object data) throws Exception {
+                //清除
                 clearKeyIfNeeded(configProvider);
                 if (data == null) {
                     throw new RxCacheException(Locale.NOT_DATA_RETURN_WHEN_CALLING_OBSERVABLE_LOADER
